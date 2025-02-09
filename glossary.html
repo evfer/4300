@@ -5,9 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Training Website - Glossary</title>
   <link rel="stylesheet" href="styles.css" />
+  <!-- Glossary-specific styles -->
+  <style>
+    /* Glossary Page Styles */
+    .glossary-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .glossary-container h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .term {
+      margin: 10px 0;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .term h2 {
+      margin: 0;
+      color: #0073e6;
+    }
+    .term p {
+      margin: 5px 0 0;
+      color: #555;
+    }
+    /* Optional: Ensure any lists inside terms look good */
+    .term ul {
+      margin: 5px 0 0 20px;
+      color: #555;
+    }
+  </style>
+  <script>
+    function filterTerms() {
+      let input = document.getElementById('search').value.toLowerCase();
+      let terms = document.getElementsByClassName('term');
+      
+      for (let term of terms) {
+          let title = term.getElementsByTagName('h2')[0].innerText.toLowerCase();
+          if (title.includes(input)) {
+              term.style.display = "block";
+          } else {
+              term.style.display = "none";
+          }
+      }
+    }
+  </script>
 </head>
 <body>
-  <!-- Top Navigation Menu -->
+  <!-- Top Navigation Menu (consistent with your project) -->
   <header>
     <nav class="top-nav">
       <ul>
@@ -18,10 +76,103 @@
     </nav>
   </header>
 
-  <!-- Placeholder Content -->
+  <!-- Main Content -->
   <main class="content-empty">
-    <h2>Glossary</h2>
-    <p>Content coming soon...</p>
+    <div class="glossary-container">
+      <h1>Glossary</h1>
+      <input type="text" id="search" class="search-bar" onkeyup="filterTerms()" placeholder="Search terms...">
+      
+      <!-- Glossary Terms -->
+      <div class="term">
+          <h2>Causal Ambiguity</h2>
+          <p>When the connection between a firm’s resources and its success is unclear, making it difficult for competitors to imitate.</p>
+          <p><strong>Example:</strong> A bakery is successful, but competitors don’t know if it’s because of the ingredients, the recipe, or customer service.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Competitive Advantage</h2>
+          <p>A firm stands out from its competitors due to cost, focus, or differentiation.</p>
+          <p><strong>Example:</strong> A local pizza shop makes faster deliveries than its competitors, attracting more customers.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Core Competencies</h2>
+          <p><!-- Add definition here --></p>
+          <p><strong>Example:</strong> <!-- Add example here --></p>
+      </div>
+      
+      <div class="term">
+          <h2>Causal Ambiguity</h2>
+          <p>Defining characteristics that allow a firm to stand out against competitors and sustain a competitive edge.</p>
+          <p><strong>Example:</strong> A shoe company is known for making the most comfortable sneakers.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Dynamic Capabilities</h2>
+          <p>The ability of a firm to improve, update, or create resources in response to changing environments.</p>
+          <p><strong>Example:</strong> Netflix transitioned from DVD rentals to streaming due to changing technology and consumer habits.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Intangible Resources</h2>
+          <p>Non-physical assets such as brand reputation, intellectual property, and corporate culture that provide competitive advantage.</p>
+          <p><strong>Example:</strong> Google’s proprietary search algorithms give it a competitive edge.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Resource-Based Theory</h2>
+          <p>A framework where a firm leverages its internal resources and capabilities as a competitive advantage.</p>
+          <p><strong>Example:</strong> Coca-Cola’s secret soda recipe and global brand recognition.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Resource Heterogeneity</h2>
+          <p>The concept that each firm possesses unique resources that are not perfectly transferable.</p>
+          <p><strong>Example:</strong> Starbucks has both a strong global brand and unique local offerings.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Resource Immobility</h2>
+          <p>Some resources cannot be easily transferred or replicated by competitors.</p>
+          <p><strong>Example:</strong> Ferrari’s brand prestige and engineering expertise.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Resources</h2>
+          <p>Assets that a firm owns or controls, which can be tangible (physical) or intangible (non-physical).</p>
+          <p><strong>Example:</strong> A farmer’s land and farming expertise.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Sustainable Competitive Advantage</h2>
+          <p>A long-term advantage that is difficult for competitors to replicate.</p>
+          <p><strong>Example:</strong> <!-- Add example here --></p>
+      </div>
+      
+      <div class="term">
+          <h2>Causal Ambiguity</h2>
+          <p><!-- Add definition here if needed --></p>
+          <p><strong>Example:</strong> A phone company keeps customers loyal because of its unique design and easy-to-use software.</p>
+      </div>
+      
+      <div class="term">
+          <h2>Tangible Resources</h2>
+          <p>Physical and measurable assets that contribute to a firm's value.</p>
+          <p><strong>Example:</strong> Toyota’s factories and manufacturing equipment.</p>
+      </div>
+      
+      <div class="term">
+          <h2>VRIO Framework</h2>
+          <p>A framework to assess whether a firm’s resources lead to sustainable competitive advantage based on Value, Rarity, Imitability, and Organization.</p>
+          <ul>
+              <li><strong>Value:</strong> Does it create value?</li>
+              <li><strong>Rarity:</strong> Is it unique?</li>
+              <li><strong>Imitability:</strong> Is it difficult to copy?</li>
+              <li><strong>Organization:</strong> Is the firm organized to exploit it?</li>
+          </ul>
+          <p><strong>Example:</strong> Apple’s iOS—valuable, rare, costly to imitate, and well-organized within Apple’s ecosystem.</p>
+      </div>
+    </div>
   </main>
 </body>
 </html>
