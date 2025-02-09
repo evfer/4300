@@ -1,0 +1,82 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Top Navigation Styles */
+  .top-nav {
+    background-color: #333;
+  }
+  .top-nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;  /* Center the menu items */
+    margin: 0;
+    padding: 0;
+  }
+  .top-nav li {
+    margin: 0;
+  }
+  .top-nav li a {
+    display: block;
+    padding: 14px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5em;  /* Increase the font size */
+  }
+  .top-nav li a:hover,
+  .top-nav li a.active {
+    background-color: #111;
+  }
+  
+  /* Layout for Modules Page */
+  .container {
+    display: flex;
+    min-height: 80vh;
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    width: 20%;
+    background: #f4f4f4;
+    padding: 20px;
+  }
+  .sidebar h3 {
+    margin-bottom: 10px;
+  }
+  .sidebar ul {
+    list-style-type: none;
+  }
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+  .sidebar li a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px;
+    display: block;
+  }
+  .sidebar li a:hover {
+    background: #ddd;
+  }
+  
+  /* Main Content Styles */
+  .content {
+    width: 80%;
+    padding: 20px;
+  }
+  .content article {
+    margin-bottom: 30px;
+  }
+  
+  /* Placeholder Content for Other Pages */
+  .content-empty {
+    padding: 20px;
+  }
+  

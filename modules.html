@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Training Website - Modules</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Additional styles for progress indicators, module display, and sidebar layout -->
+  <style>
+    /* New style to align the sidebar link and progress indicator horizontally */
+    .sidebar li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Progress indicator styles */
+    .progress-status {
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .not-started {
+      background-color: red;
+      color: white;
+    }
+    .in-progress {
+      background-color: yellow;
+      color: black;
+    }
+    .complete {
+      background-color: blue;
+      color: white;
+    }
+
+    /* Hide all modules by default */
+    .content article {
+      display: none;
+    }
+    /* Only show the module with the "active" class */
+    .content article.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation Menu -->
+  <header>
+    <nav class="top-nav">
+      <ul>
+        <li><a href="modules.html" class="active">Modules</a></li>
+        <li><a href="case-study.html">Case Study</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content: Sidebar + Module Content -->
+  <main class="container">
+    <!-- Left Sidebar: Module Navigation -->
+    <aside class="sidebar">
+      <h3>Module Menu</h3>
+      <ul>
+        <li>
+          <a href="#" onclick="showModule('module1'); return false;">Module 1</a>
+          <span id="progress-module1" class="progress-status not-started">Not Started</span>
+        </li>
+        <li>
+          <a href="#" onclick="showModule('module2'); return false;">Module 2</a>
+          <span id="progress-module2" class="progress-status not-started">Not Started</span>
+        </li>
+        <li>
+          <a href="#" onclick="showModule('module3'); return false;">Module 3</a>
+          <span id="progress-module3" class="progress-status not-started">Not Started</span>
+        </li>
+        <li>
+          <a href="#" onclick="showModule('module4'); return false;">Module 4</a>
+          <span id="progress-module4" class="progress-status not-started">Not Started</span>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Right Content Area: Module Details -->
+    <section class="content">
+      <!-- Module 1 (visible by default) -->
+      <article id="module1" class="active">
+        <h2>Module 1</h2>
+        <p>
+          Content coming soon...
+        </p>
+        <button onclick="completeModule('module1')">Complete Module</button>
+      </article>
+      <!-- Module 2 -->
+      <article id="module2">
+        <h2>Module 2</h2>
+        <p>
+          Content coming soon...
+        </p>
+        <button onclick="completeModule('module2')">Complete Module</button>
+      </article>
+      <!-- Module 3 -->
+      <article id="module3">
+        <h2>Module 3</h2>
+        <p>
+          Content coming soon...
+        </p>
+        <button onclick="completeModule('module3')">Complete Module</button>
+      </article>
+      <!-- Module 4 -->
+      <article id="module4">
+        <h2>Module 4</h2>
+        <p>
+          Content coming soon...
+        </p>
+        <button onclick="completeModule('module4')">Complete Module</button>
+      </article>
+    </section>
+  </main>
+
+  <!-- JavaScript for module progress tracking -->
+  <script>
+    // Object to track the progress of each module.
+    // Possible states: 'not-started', 'in-progress', 'complete'
+    var moduleProgress = {
+      module1: 'not-started',
+      module2: 'not-started',
+      module3: 'not-started',
+      module4: 'not-started'
+    };
+
+    // Since Module 1 is visible by default, mark it as in-progress.
+    moduleProgress.module1 = 'in-progress';
+    updateProgressIndicator('module1');
+
+    // Function to update the sidebar progress indicator for a given module.
+    function updateProgressIndicator(moduleId) {
+      var progressSpan = document.getElementById('progress-' + moduleId);
+      if (!progressSpan) return;
+
+      var status = moduleProgress[moduleId];
+      // Update the text based on the module's status.
+      if (status === 'not-started') {
+        progressSpan.textContent = 'Not Started';
+      } else if (status === 'in-progress') {
+        progressSpan.textContent = 'In Progress';
+      } else if (status === 'complete') {
+        progressSpan.textContent = 'Complete';
+      }
+      // Remove any previous status classes and add the current one.
+      progressSpan.classList.remove('not-started', 'in-progress', 'complete');
+      progressSpan.classList.add(status);
+    }
+
+    // Function to show a selected module.
+    function showModule(moduleId) {
+      // Hide all modules.
+      var articles = document.querySelectorAll('.content article');
+      articles.forEach(function(article) {
+        article.classList.remove('active');
+      });
+
+      // Show the selected module.
+      var selectedModule = document.getElementById(moduleId);
+      if (selectedModule) {
+        selectedModule.classList.add('active');
+      }
+
+      // If this module hasn't been started, mark it as in-progress.
+      if (moduleProgress[moduleId] === 'not-started') {
+        moduleProgress[moduleId] = 'in-progress';
+        updateProgressIndicator(moduleId);
+      }
+    }
+
+    // Function to mark a module as complete.
+    function completeModule(moduleId) {
+      moduleProgress[moduleId] = 'complete';
+      updateProgressIndicator(moduleId);
+
+      // Optionally, disable the complete button after marking as complete.
+      var activeArticle = document.getElementById(moduleId);
+      if (activeArticle) {
+        var completeButton = activeArticle.querySelector('button');
+        if (completeButton) {
+          completeButton.disabled = true;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
