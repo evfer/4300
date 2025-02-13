@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Training Website - Modules</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- Additional styles for progress indicators, module display, and sidebar layout -->
+  <!-- Additional styles for progress indicators, module display, sidebar layout, and certification section -->
   <style>
     /* New style to align the sidebar link and progress indicator horizontally */
     .sidebar li {
@@ -40,6 +40,21 @@
     /* Only show the module with the "active" class */
     .content article.active {
       display: block;
+    }
+
+    /* Styles for disabled links (greyed out) */
+    .sidebar a.disabled {
+      pointer-events: none;
+      color: grey;
+      text-decoration: none;
+    }
+
+    /* Style for the info icon */
+    .info-icon {
+      font-size: 0.9em;
+      color: grey;
+      cursor: default;
+      margin-left: 4px;
     }
   </style>
 </head>
@@ -76,6 +91,17 @@
         <li>
           <a href="#" onclick="showModule('module4'); return false;">Module 4</a>
           <span id="progress-module4" class="progress-status not-started">Not Started</span>
+        </li>
+      </ul>
+      
+      <!-- New Certification Section -->
+      <h3>
+        Certification 
+        <span class="info-icon" title="Complete all modules to unlock the certificate">ℹ️</span>
+      </h3>
+      <ul>
+        <li>
+          <a href="#" id="certificate-link" class="disabled" onclick="obtainCertificate(); return false;">Obtain Certificate</a>
         </li>
       </ul>
     </aside>
@@ -117,7 +143,7 @@
     </section>
   </main>
 
-  <!-- JavaScript for module progress tracking -->
+  <!-- JavaScript for module progress tracking and certificate unlock -->
   <script>
     // Object to track the progress of each module.
     // Possible states: 'not-started', 'in-progress', 'complete'
@@ -131,6 +157,7 @@
     // Since Module 1 is visible by default, mark it as in-progress.
     moduleProgress.module1 = 'in-progress';
     updateProgressIndicator('module1');
+    updateCertificateLink();
 
     // Function to update the sidebar progress indicator for a given module.
     function updateProgressIndicator(moduleId) {
@@ -184,6 +211,45 @@
         if (completeButton) {
           completeButton.disabled = true;
         }
+      }
+
+      // Check if all modules are complete to enable the certificate link.
+      updateCertificateLink();
+    }
+
+    // Function to check whether all modules are complete and update the certificate link.
+    function updateCertificateLink() {
+      var allComplete = Object.keys(moduleProgress).every(function(key) {
+        return moduleProgress[key] === 'complete';
+      });
+      var certLink = document.getElementById('certificate-link');
+      if (allComplete) {
+        certLink.classList.remove('disabled');
+        certLink.title = "Click to obtain your certificate!";
+      } else {
+        certLink.classList.add('disabled');
+        certLink.title = "Complete all modules to unlock certificate.";
+      }
+    }
+
+    // Function to handle obtaining the certificate.
+    function obtainCertificate() {
+      // Double-check that all modules are complete.
+      var allComplete = Object.keys(moduleProgress).every(function(key) {
+        return moduleProgress[key] === 'complete';
+      });
+      if (!allComplete) {
+        alert("Please complete all modules to unlock the certificate.");
+        return;
+      }
+      
+      // Prompt for the user's full name.
+      var fullName = prompt("Please enter your full name:");
+      if (fullName && fullName.trim() !== "") {
+        // Redirect to the certificate page (you can adjust the URL as needed).
+        window.location.href = "certificate.html?name=" + encodeURIComponent(fullName.trim());
+      } else {
+        alert("Please enter a valid name to obtain your certificate.");
       }
     }
   </script>
