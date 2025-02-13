@@ -254,8 +254,8 @@
       // Prompt for the user's full name.
       var fullName = prompt("Please enter your full name:");
       if (fullName && fullName.trim() !== "") {
-        // Redirect to the certificate page (adjust the URL as needed).
-        window.location.href = "certificate.html?name=" + encodeURIComponent(fullName.trim());
+        // Open the certificate page in a new tab.
+        window.open("certificate.html?name=" + encodeURIComponent(fullName.trim()), "_blank");
       } else {
         alert("Please enter a valid name to obtain your certificate.");
       }
