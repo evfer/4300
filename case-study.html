@@ -5,6 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Training Website - Case Study</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Button styling */
+    .case-study-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .case-study-buttons button {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 2px solid blue;
+      background-color: white;
+      color: blue;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    .case-study-buttons button:hover {
+      background-color: blue;
+      color: white;
+    }
+
+    /* Case study content area */
+    .case-study-content {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+  </style>
 </head>
 <body>
   <!-- Top Navigation Menu -->
@@ -18,10 +50,64 @@
     </nav>
   </header>
 
-  <!-- Placeholder Content -->
-  <main class="content-empty">
-    <h2>Case Study</h2>
-    <p>Content coming soon...</p>
+  <main class="content">
+    <h2>Case Studies</h2>
+    <!-- Case Study Content Area -->
+    <div id="case-study-content" class="case-study-content">
+      <p>Select a case study to view details.</p>
+    </div>
+
+    <br>
+
+    <!-- Case Study Selection Buttons -->
+    <div class="case-study-buttons">
+      <button onclick="loadCaseStudy('case1')">Case Study 1</button>
+      <button onclick="loadCaseStudy('case2')">Case Study 2</button>
+    </div>
+
   </main>
+
+  <script>
+    function loadCaseStudy(caseId) {
+      let caseStudies = {
+        case1: `
+          <h3>Case Study 1: Title</h3>
+          <h4>Overview</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae feugiat magna. Sed ultrices justo nec arcu consequat, at cursus orci tincidunt.</p>
+          <h4>Description</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae feugiat magna. Sed ultrices justo nec arcu consequat, at cursus orci tincidunt.</p>
+          <h4>Optional Section</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae feugiat magna. Sed ultrices justo nec arcu consequat, at cursus orci tincidunt.</p>
+          <h4>Optional Section</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae feugiat magna. Sed ultrices justo nec arcu consequat, at cursus orci tincidunt.</p>
+          <h4>Key Insights</h4>
+          <ul>
+            <li>Lorem ipsum dolor sit amet,</li>
+            <li>Lorem ipsum dolor sit amet,</li>
+            <li>Lorem ipsum dolor sit amet,</li>
+          </ul>
+        `,
+        case2: `
+        <h3>Case Study 2: Title</h3>
+          <h4>Overview</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae feugiat magna. Sed ultrices justo nec arcu consequat, at cursus orci tincidunt.</p>
+          <h4>Description</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae feugiat magna. Sed ultrices justo nec arcu consequat, at cursus orci tincidunt.</p>
+          <h4>Optional Section</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae feugiat magna. Sed ultrices justo nec arcu consequat, at cursus orci tincidunt.</p>
+          <h4>Optional Section</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae feugiat magna. Sed ultrices justo nec arcu consequat, at cursus orci tincidunt.</p>
+          <h4>Key Insights</h4>
+          <ul>
+            <li>Lorem ipsum dolor sit amet,</li>
+            <li>Lorem ipsum dolor sit amet,</li>
+            <li>Lorem ipsum dolor sit amet,</li>
+          </ul>
+        `
+      };
+
+      document.getElementById("case-study-content").innerHTML = caseStudies[caseId] || "<p>Case study not found.</p>";
+    }
+  </script>
 </body>
 </html>

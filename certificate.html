@@ -3,53 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Certificate</title>
+  <title>Certificate of Completion</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Georgia', serif;
       text-align: center;
-      margin: 2em;
-      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+    .certificate-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
     .certificate {
-      border: 3px solid #000;
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
+      width: 700px;
+      padding: 40px;
       background: #fff;
+      border: 10px solid #d4af37;
+      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
     }
     h1 {
-      margin-top: 0;
+      font-size: 2.5em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .subheading {
+      font-size: 1.2em;
+      color: #666;
+      margin-bottom: 30px;
     }
     .user-name {
-      font-size: 1.5em;
+      font-size: 2em;
       font-weight: bold;
+      color: #222;
       margin: 20px 0;
+    }
+    .certificate p {
+      font-size: 1.1em;
+      color: #444;
+      margin-bottom: 10px;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 1em;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <div class="certificate">
-    <h1>Certificate of Completion</h1>
-    <p>This certificate is proudly presented to:</p>
-    <div class="user-name" id="user-name">[Name]</div>
-    <p>For successfully completing all training modules for resources-based theory.</p>
+  <div class="certificate-container">
+    <div class="certificate">
+      <h1>Certificate of Completion</h1>
+      <p class="subheading">This certificate is proudly presented to:</p>
+      <div class="user-name" id="user-name">[Name]</div>
+      <p>For successfully completing all training modules for Resources-Based Theory.</p>
+      <div class="footer">Awarded on <span id="date"></span></div>
+    </div>
   </div>
 
   <script>
-    // Function to get URL query parameters
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
     }
 
-    // Retrieve the 'name' parameter and display it.
-    var userName = getQueryParam('name');
-    if (userName) {
-      document.getElementById('user-name').textContent = userName;
-    } else {
-      document.getElementById('user-name').textContent = 'Unknown User';
-    }
+    document.getElementById('user-name').textContent = getQueryParam('name') || 'Unknown User';
+    document.getElementById('date').textContent = new Date().toLocaleDateString();
   </script>
 </body>
 </html>

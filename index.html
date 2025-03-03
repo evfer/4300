@@ -5,51 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Training Website - Modules</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- Additional styles for progress indicators, module display, sidebar layout, and certification section -->
   <style>
-    /* New style to align the sidebar link and progress indicator horizontally */
+    /* Sidebar styling */
     .sidebar li {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
+    .sidebar a.disabled {
+      pointer-events: none;
+      color: grey;
+      text-decoration: none;
+      background-color: lightgray;
+      padding: 8px 12px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    /* Enabled certificate link (green) */
+    .sidebar a.enabled {
+      pointer-events: auto;
+      color: white;
+      background-color: green;
+      padding: 8px 12px;
+      border-radius: 5px;
+      display: inline-block;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .sidebar a.enabled:hover {
+      background-color: #32cd32; 
+    }
     /* Progress indicator styles */
     .progress-status {
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 0.9em;
     }
-    .not-started {
-      background-color: red;
-      color: white;
-    }
-    .in-progress {
-      background-color: yellow;
-      color: black;
-    }
-    .complete {
-      background-color: blue;
-      color: white;
-    }
+    .not-started { background-color: red; color: white; }
+    .in-progress { background-color: yellow; color: black; }
+    .complete { background-color: blue; color: white; }
 
-    /* Hide all modules by default */
-    .content article {
-      display: none;
-    }
-    /* Only show the module with the "active" class */
-    .content article.active {
-      display: block;
-    }
+    /* Content section */
+    .content article { display: none; }
+    .content article.active { display: block; }
 
-    /* Styles for disabled links (greyed out) */
-    .sidebar a.disabled {
-      pointer-events: none;
-      color: grey;
-      text-decoration: none;
-    }
+    /* Disabled links */
+    .sidebar a.disabled { pointer-events: none; color: grey; text-decoration: none; }
 
-    /* Style for the traditional info icon: grey circle with white "i" */
+    /* Info icon */
     .info-icon {
       display: inline-block;
       width: 18px;
@@ -62,12 +69,25 @@
       font-size: 12px;
       font-weight: bold;
       margin-left: 5px;
-      cursor: default;
+      cursor: pointer; 
     }
+
+    .tooltip {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 12px;
+      color: gray;
+    }
+
+    .info-icon:hover + .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
   </style>
 </head>
 <body>
-  <!-- Top Navigation Menu -->
+  <!-- Top Navigation -->
   <header>
     <nav class="top-nav">
       <ul>
@@ -80,32 +100,21 @@
 
   <!-- Main Content: Sidebar + Module Content -->
   <main class="container">
-    <!-- Left Sidebar: Module Navigation -->
+    <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <h3>Module Menu</h3>
       <ul>
-        <li>
-          <a href="#" onclick="showModule('module1'); return false;">Module 1</a>
-          <span id="progress-module1" class="progress-status not-started">Not Started</span>
-        </li>
-        <li>
-          <a href="#" onclick="showModule('module2'); return false;">Module 2</a>
-          <span id="progress-module2" class="progress-status not-started">Not Started</span>
-        </li>
-        <li>
-          <a href="#" onclick="showModule('module3'); return false;">Module 3</a>
-          <span id="progress-module3" class="progress-status not-started">Not Started</span>
-        </li>
-        <li>
-          <a href="#" onclick="showModule('module4'); return false;">Module 4</a>
-          <span id="progress-module4" class="progress-status not-started">Not Started</span>
-        </li>
+        <li><a href="#" onclick="showModule('module1'); return false;">Module 1</a> <span id="progress-module1" class="progress-status not-started">Not Started</span></li>
+        <li><a href="#" onclick="showModule('module2'); return false;">Module 2</a> <span id="progress-module2" class="progress-status not-started">Not Started</span></li>
+        <li><a href="#" onclick="showModule('module3'); return false;">Module 3</a> <span id="progress-module3" class="progress-status not-started">Not Started</span></li>
+        <li><a href="#" onclick="showModule('module4'); return false;">Module 4</a> <span id="progress-module4" class="progress-status not-started">Not Started</span></li>
       </ul>
-      
-      <!-- New Certification Section -->
+
+      <!-- Certification Section -->
       <h3>
         Certification
-        <span class="info-icon" title="Complete all modules to unlock your certificate">i</span>
+        <span class="info-icon">i</span>
+        <span class="tooltip">Complete all modules to unlock your certificate</span>
       </h3>
       <ul>
         <li>
@@ -114,47 +123,16 @@
       </ul>
     </aside>
 
-    <!-- Right Content Area: Module Details -->
+    <!-- Dynamic Module Content -->
     <section class="content">
-      <!-- Module 1 (visible by default) -->
-      <article id="module1" class="active">
-        <h2>Module 1</h2>
-        <p>
-          Content coming soon...
-        </p>
-        <button onclick="completeModule('module1')">Complete Module</button>
-      </article>
-      <!-- Module 2 -->
-      <article id="module2">
-        <h2>Module 2</h2>
-        <p>
-          Content coming soon...
-        </p>
-        <button onclick="completeModule('module2')">Complete Module</button>
-      </article>
-      <!-- Module 3 -->
-      <article id="module3">
-        <h2>Module 3</h2>
-        <p>
-          Content coming soon...
-        </p>
-        <button onclick="completeModule('module3')">Complete Module</button>
-      </article>
-      <!-- Module 4 -->
-      <article id="module4">
-        <h2>Module 4</h2>
-        <p>
-          Content coming soon...
-        </p>
-        <button onclick="completeModule('module4')">Complete Module</button>
-      </article>
+      <div id="module-content">
+        <!-- Module content will be dynamically loaded here -->
+      </div>
     </section>
   </main>
 
-  <!-- JavaScript for module progress tracking and certificate unlock -->
+  <!-- JavaScript for Module Loading & Progress -->
   <script>
-    // Object to track the progress of each module.
-    // Possible states: 'not-started', 'in-progress', 'complete'
     var moduleProgress = {
       module1: 'not-started',
       module2: 'not-started',
@@ -162,104 +140,116 @@
       module4: 'not-started'
     };
 
-    // Since Module 1 is visible by default, mark it as in-progress.
-    moduleProgress.module1 = 'in-progress';
-    updateProgressIndicator('module1');
-    updateCertificateLink();
+    // Load a module dynamically
+    function showModule(moduleId) {
+      fetch(moduleId + ".html")
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById("module-content").innerHTML = html;
 
-    // Function to update the sidebar progress indicator for a given module.
+          // Update progress if module hasn't been started
+          if (moduleProgress[moduleId] === "not-started") {
+            moduleProgress[moduleId] = "in-progress";
+            updateProgressIndicator(moduleId);
+          }
+        })
+        .catch(error => console.error("Error loading module:", error));
+    }
+
+    // Load first module by default
+    document.addEventListener("DOMContentLoaded", function () {
+      showModule("module1");
+    });
+
+    // Update progress indicator
     function updateProgressIndicator(moduleId) {
-      var progressSpan = document.getElementById('progress-' + moduleId);
+      var progressSpan = document.getElementById("progress-" + moduleId);
       if (!progressSpan) return;
 
       var status = moduleProgress[moduleId];
-      // Update the text based on the module's status.
-      if (status === 'not-started') {
-        progressSpan.textContent = 'Not Started';
-      } else if (status === 'in-progress') {
-        progressSpan.textContent = 'In Progress';
-      } else if (status === 'complete') {
-        progressSpan.textContent = 'Complete';
-      }
-      // Remove any previous status classes and add the current one.
-      progressSpan.classList.remove('not-started', 'in-progress', 'complete');
-      progressSpan.classList.add(status);
+      progressSpan.textContent = status.replace("-", " ");
+      progressSpan.className = "progress-status " + status;
     }
 
-    // Function to show a selected module.
-    function showModule(moduleId) {
-      // Hide all modules.
-      var articles = document.querySelectorAll('.content article');
-      articles.forEach(function(article) {
-        article.classList.remove('active');
-      });
-
-      // Show the selected module.
-      var selectedModule = document.getElementById(moduleId);
-      if (selectedModule) {
-        selectedModule.classList.add('active');
-      }
-
-      // If this module hasn't been started, mark it as in-progress.
-      if (moduleProgress[moduleId] === 'not-started') {
-        moduleProgress[moduleId] = 'in-progress';
-        updateProgressIndicator(moduleId);
-      }
-    }
-
-    // Function to mark a module as complete.
+    // Complete a module
     function completeModule(moduleId) {
-      moduleProgress[moduleId] = 'complete';
+      moduleProgress[moduleId] = "complete";
       updateProgressIndicator(moduleId);
-
-      // Optionally, disable the complete button after marking as complete.
-      var activeArticle = document.getElementById(moduleId);
-      if (activeArticle) {
-        var completeButton = activeArticle.querySelector('button');
-        if (completeButton) {
-          completeButton.disabled = true;
-        }
-      }
-
-      // Check if all modules are complete to enable the certificate link.
       updateCertificateLink();
     }
 
-    // Function to check whether all modules are complete and update the certificate link.
-    function updateCertificateLink() {
-      var allComplete = Object.keys(moduleProgress).every(function(key) {
-        return moduleProgress[key] === 'complete';
-      });
-      var certLink = document.getElementById('certificate-link');
-      if (allComplete) {
-        certLink.classList.remove('disabled');
-        certLink.title = "Click to obtain your certificate!";
-      } else {
-        certLink.classList.add('disabled');
-        certLink.title = "Complete all modules to unlock certificate.";
-      }
-    }
+    // Enable certificate link if all modules are complete
+    // function updateCertificateLink() {
+    //   var allComplete = Object.values(moduleProgress).every(status => status === "complete");
+    //   var certLink = document.getElementById('certificate-link');
+    //   if (allComplete) {
+    //     certLink.classList.remove('disabled');
+    //     certLink.title = "Click to obtain your certificate!";
+    //   } else {
+    //     certLink.classList.add('disabled');
+    //     certLink.title = "Complete all modules to unlock certificate.";
+    //   }
+    // }
 
-    // Function to handle obtaining the certificate.
+    function updateCertificateLink() {
+    var allComplete = Object.values(moduleProgress).every(status => status === "complete");
+    var certLink = document.getElementById('certificate-link');
+
+    if (allComplete) {
+      certLink.classList.remove('disabled');
+      certLink.classList.add('enabled'); // Make the button green
+      certLink.title = "Click to obtain your certificate!";
+    } else {
+      certLink.classList.remove('enabled');
+      certLink.classList.add('disabled'); // Keep it grey
+      certLink.title = "Complete all modules to unlock certificate.";
+    }
+  }
+
+    // Obtain certificate
     function obtainCertificate() {
-      // Double-check that all modules are complete.
-      var allComplete = Object.keys(moduleProgress).every(function(key) {
-        return moduleProgress[key] === 'complete';
-      });
+      var allComplete = Object.values(moduleProgress).every(status => status === "complete");
       if (!allComplete) {
         alert("Please complete all modules to unlock the certificate.");
         return;
       }
-      
-      // Prompt for the user's full name.
-      var fullName = prompt("Please enter your full name:");
+
+      var fullName = prompt("Enter your full name:");
       if (fullName && fullName.trim() !== "") {
-        // Open the certificate page in a new tab.
         window.open("certificate.html?name=" + encodeURIComponent(fullName.trim()), "_blank");
       } else {
         alert("Please enter a valid name to obtain your certificate.");
       }
     }
+
+    function checkQuiz() {
+    let correctAnswers = { q1: "b", q2: "c", q3: "a" };
+    let allCorrect = true;
+
+    for (let q in correctAnswers) {
+      let selected = document.querySelector(`input[name="${q}"]:checked`);
+      let feedback = document.getElementById(`feedback-${q}`);
+      
+      if (selected) {
+        if (selected.value === correctAnswers[q]) {
+          feedback.textContent = "Correct!";
+          feedback.style.color = "green";
+        } else {
+          feedback.textContent = "Incorrect.";
+          feedback.style.color = "red";
+          allCorrect = false;
+        }
+      } else {
+        feedback.textContent = "Please select an answer.";
+        feedback.style.color = "red";
+        allCorrect = false;
+      }
+    }
+
+    if (allCorrect) {
+      document.getElementById("complete-module-btn").removeAttribute("disabled");
+    }
+  }
   </script>
 </body>
 </html>
