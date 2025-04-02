@@ -184,18 +184,6 @@
     }
 
     // Enable certificate link if all modules are complete
-    // function updateCertificateLink() {
-    //   var allComplete = Object.values(moduleProgress).every(status => status === "complete");
-    //   var certLink = document.getElementById('certificate-link');
-    //   if (allComplete) {
-    //     certLink.classList.remove('disabled');
-    //     certLink.title = "Click to obtain your certificate!";
-    //   } else {
-    //     certLink.classList.add('disabled');
-    //     certLink.title = "Complete all modules to unlock certificate.";
-    //   }
-    // }
-
     function updateCertificateLink() {
     var allComplete = Object.values(moduleProgress).every(status => status === "complete");
     var certLink = document.getElementById('certificate-link');
@@ -227,34 +215,48 @@
       }
     }
 
-    function checkQuiz() {
-    let correctAnswers = { q1: "b", q2: "c", q3: "a" };
+  function checkQuiz(moduleNumber) {
+    const quizzes = {
+        1: { q1: "b", q2: "c", q3: "a" },
+        2: { q1: "a", q2: "b", q3: "c" },
+        3: { q1: "b", q2: "c", q3: "a" },
+        4: { q1: "a", q2: "b", q3: "c" },
+        5: { q1: "b", q2: "c", q3: "a" },
+        6: { q1: "a", q2: "b", q3: "c" },
+    };
+
+    let correctAnswers = quizzes[moduleNumber];
+    if (!correctAnswers) {
+        console.error("No quiz configuration found for module " + moduleNumber);
+        return;
+    }
+
     let allCorrect = true;
 
     for (let q in correctAnswers) {
-      let selected = document.querySelector(`input[name="${q}"]:checked`);
-      let feedback = document.getElementById(`feedback-${q}`);
-      
-      if (selected) {
-        if (selected.value === correctAnswers[q]) {
-          feedback.textContent = "Correct!";
-          feedback.style.color = "green";
+        let selected = document.querySelector(`input[name="${q}"]:checked`);
+        let feedback = document.getElementById(`feedback-${q}`);
+
+        if (selected) {
+            if (selected.value === correctAnswers[q]) {
+                feedback.textContent = "Correct!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "Incorrect.";
+                feedback.style.color = "red";
+                allCorrect = false;
+            }
         } else {
-          feedback.textContent = "Incorrect.";
-          feedback.style.color = "red";
-          allCorrect = false;
+            feedback.textContent = "Please select an answer.";
+            feedback.style.color = "red";
+            allCorrect = false;
         }
-      } else {
-        feedback.textContent = "Please select an answer.";
-        feedback.style.color = "red";
-        allCorrect = false;
-      }
     }
 
     if (allCorrect) {
-      document.getElementById("complete-module-btn").removeAttribute("disabled");
+        document.getElementById("complete-module-btn").removeAttribute("disabled");
     }
-  }
+}
   </script>
 </body>
 </html>
