@@ -214,15 +214,35 @@
         alert("Please enter a valid name to obtain your certificate.");
       }
     }
+  function resetQuiz(moduleNumber) {
+    const questions = ["q1", "q2", "q3"];
 
+    questions.forEach(q => {
+        // Uncheck any selected radio button
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected) {
+            selected.checked = false;
+        }
+
+        // Clear feedback text
+        const feedback = document.getElementById(`feedback-${q}`);
+        if (feedback) {
+            feedback.textContent = "";
+            feedback.style.color = "";
+        }
+    });
+
+    // Optional: scroll to top of the quiz
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   function checkQuiz(moduleNumber) {
     const quizzes = {
-        1: { q1: "c", q2: "b", q3: "c" },
-        2: { q1: "b", q2: "c", q3: "c" },
-        3: { q1: "b", q2: "c", q3: "c" },
-        4: { q1: "b", q2: "d", q3: "d" },
-        5: { q1: "b", q2: "c", q3: "c" },
-        6: { q1: "c", q2: "c", q3: "b" },
+        1: { q1: "c", q2: "c", q3: "b" },
+        2: { q1: "c", q2: "c", q3: "c" },
+        3: { q1: "d", q2: "b", q3: "b" },
+        4: { q1: "c", q2: "d", q3: "b" },
+        5: { q1: "c", q2: "b", q3: "c" },
+        6: { q1: "a", q2: "a", q3: "c" },
     };
 
     let correctAnswers = quizzes[moduleNumber];
